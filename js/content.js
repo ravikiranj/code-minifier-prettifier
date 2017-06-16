@@ -199,7 +199,7 @@ var codeMP = (function($) {
 
         initCodeMirror: function() {
             codeMirror = CodeMirror(document.getElementById(mainDivId), {
-                value: "var test = 1;",
+                value: "/* Paste or Type something here */",
                 mode: modeMap[currentMode],
                 indentUnit: 4,
                 lineNumbers: true,
