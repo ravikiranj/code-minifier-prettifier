@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Code Minifier Prettifier</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-select.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/styles.css" rel="stylesheet">
+    <!-- CodeMirror -->
+    <link href="css/codemirror/codemirror.css" rel="stylesheet">
+    <link href="css/codemirror/theme/dracula.css" rel="stylesheet">
+    <link href="css/codemirror/theme/eclipse.css" rel="stylesheet">
+    <link href="css/codemirror/theme/monokai.css" rel="stylesheet">
+    <link href="css/codemirror/theme/solarized.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<div class="container-fluid" id="MAIN">
+    <h2>Code Minifier and Prettifier</h2>
+    <form class="form-inline options">
+        <div class="form-group">
+            <select id="THEME" class=".col-lg-6">
+                <option value="default">default</option>
+                <option value="dracula">dracula</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select id="MODE" class=".col-lg-6">
+                <option value="css">css</option>
+                <option value="html">html</option>
+                <option value="javascript">javascript</option>
+                <option value="json">json</option>
+                <option value="markdown">markdown</option>
+                <option value="sql">sql</option>
+                <option value="xml">xml</option>
+            </select>
+        </div>
+        <input type="button" value="Minify" id="MINIFY" class="btn btn-default"/>
+        <input type="button" value="Prettify" id="PRETTIFY" class="btn btn-default"/>
+    </form>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery-3.2.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-select.min.js"></script>
+<!-- Codemirror -->
+<script src="js/codemirror/codemirror.js"></script>
+<script src="js/codemirror/javascript.js"></script>
+<script src="js/codemirror/sql.js"></script>
+<script src="js/codemirror/css.js"></script>
+<script src="js/codemirror/htmlmixed.js"></script>
+<script src="js/codemirror/javascript.js"></script>
+<script src="js/codemirror/sql.js"></script>
+<script src="js/codemirror/xml.js"></script>
+<!-- content.js -->
+<script src="js/content.js"></script>
+</body>
+</html>
