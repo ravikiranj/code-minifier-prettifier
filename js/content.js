@@ -12,30 +12,99 @@ var codeMP = (function($) {
             "html": "text/html",
             "javascript": "text/javascript",
             "json": "application/json",
-            "markdown": "text/x-markdown",
             "sql": "text/x-sql",
             "xml": "application/xml",
         },
         modes = Object.keys(modeMap),
         currentTheme = defaultTheme,
-        currentMode = defaultMode
+        currentMode = defaultMode,
+        uglifyJsCompressor = UglifyJS.Compressor()
     ;
 
     modes.sort();
 
     // Public
     return  {
+        minifyPrettifyJs: function(currData, beautify) {
+            var ast = uglifyJS.parse(currData);
+            ast.figure_out_scope();
+            ast = ast.transform(uglifyJsCompressor);
+            return ast.print_to_string({beautify: beautify});
+        },
+
+        nonEmptySqlFilter: function(str) {
+            console.log(str);
+            return str && str.length > 0 && str !== ";";
+        },
+
         minify: function() {
+            var currData = codeMirror.getValue(),
+                newData = ""
+            ;
+            switch (currentMode) {
+                case "css":
+                    newData = pd.cssmin(currData);
+                    break;
+                case "html":
+                case "xml":
+                    newData = pd.xmlmin(currData);
+                    break;
+                case "json":
+                    newData = pd.jsonmin(currData);
+                    break;
+                case "sql":
+                    var sqlStatements = currData.split(";");
+                    var minifiedSql = $.map(sqlStatements, function(sqlStatement) {
+                        return pd.sqlmin(sqlStatement + ";").trim();
+                    });
+                    newData = minifiedSql.filter(this.nonEmptySqlFilter).join("\n");
+                    break;
+                case "javascript":
+                    newData = this.minifyPrettifyJs(currData, false);
+                    break;
+                default:
+                    newData = this.minifyPrettifyJs(currData, false);
+                    break;
+            }
+            codeMirror.setValue(newData);
         },
 
         prettify: function() {
-
+            var currData = codeMirror.getValue(),
+                newData = ""
+            ;
+            switch (currentMode) {
+                case "css":
+                    newData = pd.css(currData);
+                    break;
+                case "html":
+                case "xml":
+                    newData = pd.xml(currData);
+                    break;
+                case "json":
+                    newData = pd.json(currData);
+                    break;
+                case "sql":
+                    var sqlStatements = currData.split(";");
+                    var prettifiedSql = $.map(sqlStatements, function(sqlStatement) {
+                        return sqlFormatter.format(sqlStatement + ";", "SQL").trim();
+                    });
+                    newData = prettifiedSql.filter(this.nonEmptySqlFilter).join("\n\n");
+                    break;
+                case "javascript":
+                    newData = this.minifyPrettifyJs(currData, true);
+                    break;
+                default:
+                    newData = this.minifyPrettifyJs(currData, true);
+                    break;
+            }
+            codeMirror.setValue(newData);
         },
 
         initSelectDropdowns: function() {
             $("select").selectpicker({
                 style: 'btn-default',
-                size: 4,
+                size: 10,
                 width: 'auto'
             });
         },
@@ -80,6 +149,7 @@ var codeMP = (function($) {
 
         updateTheme: function(themeName) {
             themeName = $.inArray(themeName, themes) != -1 ? themeName : defaultTheme;
+            currentTheme = themeName;
             if (codeMirror) {
                 codeMirror.setOption("theme", themeName);
             }
@@ -88,6 +158,7 @@ var codeMP = (function($) {
 
         updateMode: function(modeName) {
             modeName = $.inArray(modeName, modes) != -1 ? modeName : defaultMode;
+            currentMode = modeName;
             if (codeMirror) {
                 codeMirror.setOption("mode", modeMap[modeName]);
             }
