@@ -36,7 +36,6 @@ var codeMP = (function($) {
             $("select").selectpicker({
                 style: 'btn-default',
                 size: 4,
-                noneSelectedText: 'Select Theme',
                 width: 'auto'
             });
         },
