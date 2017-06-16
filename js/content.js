@@ -6,7 +6,7 @@ var codeMP = (function($) {
         codeMirror,
         defaultTheme = "darcula",
         defaultMode = "javascript",
-        themes = ["default", "dracula"],
+        themes = ["default", "dracula", "eclipse", "monokai", "solarized dark", "solarized light"],
         modeMap = {
             "css": "text/css",
             "html": "text/html",
