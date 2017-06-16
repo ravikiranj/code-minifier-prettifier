@@ -203,7 +203,10 @@ var codeMP = (function($) {
                 mode: modeMap[currentMode],
                 indentUnit: 4,
                 lineNumbers: true,
-                theme: currentTheme
+                lineWrapping: true,
+                theme: currentTheme,
+                foldGutter: true,
+                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
             });
             codeMirror.setSize("100%", "100%");
         },

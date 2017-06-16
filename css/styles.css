@@ -2,7 +2,7 @@ div.CodeMirror {
     margin-top: 20px;
 }
 div.CodeMirror-scroll {
-    min-height: 600px;
+    min-height: 1800px;
 }
 
 .options .btn, .options .bootstrap-select {
