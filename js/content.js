@@ -26,7 +26,7 @@ var codeMP = (function($) {
     // Public
     return  {
         minifyPrettifyJs: function(currData, beautify) {
-            var ast = uglifyJS.parse(currData);
+            var ast = UglifyJS.parse(currData);
             ast.figure_out_scope();
             ast = ast.transform(uglifyJsCompressor);
             return ast.print_to_string({beautify: beautify});
